@@ -3,7 +3,7 @@ from scraper import scrape_website
 import json
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=".")
 
 @app.route("/")
 def index():
@@ -14,7 +14,6 @@ def scrape():
     url = request.form["url"]
     data = scrape_website(url)
 
-    # Save result to a JSON file
     file_path = "scraped_data.json"
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
@@ -27,3 +26,4 @@ def download():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
